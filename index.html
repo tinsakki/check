@@ -32,14 +32,6 @@ body {
   50% {background-position: 100% 50%;}
   100% {background-position: 0% 50%;}
 }
-.name {
-  font-family: 'DM Serif Display', serif;
-  font-size: 66px;
-  font-weight: 400;
-  margin: 15px 0 30px 0;
-  letter-spacing: 1px;
-}
-
 
 .card {
   position: relative;
@@ -59,7 +51,7 @@ h1 {
 }
 
 .name {
-  font-size: 54px;
+  font-size: 56px;
   font-weight: 700;
   margin-bottom: 25px;
 }
@@ -72,7 +64,7 @@ h1 {
 
 .buttons {
   position: relative;
-  height: 70px;
+  height: 80px;
 }
 
 button {
@@ -133,7 +125,7 @@ button {
 
 <div class="card">
   <h1>Hey</h1>
-  <div class="name" >Anjali</div>
+  <div class="name">Anjali</div>
   <div class="question">Will you be my Valentine? ❤️</div>
 
   <div class="buttons">
@@ -146,27 +138,40 @@ button {
 const noBtn = document.getElementById("no");
 const yesBtn = document.getElementById("yes");
 
-noBtn.addEventListener("mouseenter", () => {
+/* Move NO button */
+function moveNoButton() {
   const card = document.querySelector(".card");
   const rect = card.getBoundingClientRect();
 
   const maxX = rect.width - noBtn.offsetWidth;
-  const maxY = 40;
+  const maxY = 50;
 
   noBtn.style.left = Math.random() * maxX + "px";
   noBtn.style.top = Math.random() * maxY + "px";
+}
+
+/* Desktop hover */
+noBtn.addEventListener("mouseenter", moveNoButton);
+
+/* Mobile touch */
+noBtn.addEventListener("touchstart", function(e) {
+  e.preventDefault();
+  moveNoButton();
 });
 
+/* YES click */
 yesBtn.addEventListener("click", () => {
   document.body.innerHTML = `
     <div class="final">
       <h1 style="font-size:48px;">She Said YES ❤️</h1>
-      <p style="margin-top:20px;font-size:20px;">Anjali, I love you forever 💖</p>
+      <p style="margin-top:20px;font-size:20px;">
+        Anjali, I love you forever 💖
+      </p>
     </div>
   `;
 });
 
-/* Floating hearts */
+/* Floating hearts generator */
 function createHeart() {
   const heart = document.createElement("div");
   heart.classList.add("heart");
